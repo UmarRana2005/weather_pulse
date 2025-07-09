@@ -26,6 +26,12 @@
 
 ---
 
+## 🖼️ UI Preview
+
+![WeatherPulse Preview](./public/weatherAppUI.jpg)
+
+---
+
 ## ⚙️ Getting Started
 
 ### 1. Clone the repository
@@ -33,3 +39,40 @@
 ```bash
 git clone https://github.com/yourusername/WeatherPulse.git
 cd WeatherPulse
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup environment variables
+ Create a .env.local file and add your OpenWeatherMap API key:
+ 
+```env
+OPENWEATHER_API_KEY=your_api_key_here
+```
+
+### 4. Run the development server
+
+```bash
+npm run dev
+```
+Visit http://localhost:3000 to view the app.
+
+## 📁 Folder Structure
+
+```bash
+/app              → Next.js App Router pages and layouts
+/components       → UI components (shadcn/ui)
+/lib              → Utility functions (e.g., weather API)
+public/           → Static assets (images, icons)
+tailwind.config.ts → Tailwind theme config
+```
+
+## ✨ Author
+
+**Muhammad Umar Rana**
+- 📧 [umerrana2k05@gmail.com](umerrana2k05@gmail.com)
+- 🔗 [/in/muhammad-umar-rana](https://linkedin.com/in/muhammad-umar-rana)
