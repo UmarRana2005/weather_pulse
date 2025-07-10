@@ -19,7 +19,7 @@ const SideBar = () => {
   };
   return (
     <div className="flex flex-col max-w-fit min-h-full items-center gap-16 p-2">
-      <div className="size-10 grid place-content-center p-2 relative">
+      <div className="size-12 grid place-content-center p-2 relative">
         <Image
           src={logo}
           alt="WeatherPulse"

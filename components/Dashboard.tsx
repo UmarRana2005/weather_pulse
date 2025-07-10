@@ -4,12 +4,13 @@ import Image from "next/image";
 import Avatar from "../public/avatar.jpg";
 import SearchBar from "./SearchBar";
 import ThemeToggle from "./ThemeToggle";
+import Data from "@/app/test/data";
 const Dashboard = () => {
   return (
-    <div className="flex flex-col gap-9 items-center justify-start px-2 py-2">
-      <div className="w-[750px] bg-orsange-200 flex justify-between items-start gap-3 px-2 py-3">
+    <div className="flex flex-col gap-9 items-start justify-start px-2 py-2 bg-piank-200">
+      <div className="w-[750px] flex justify-between items-start gap-3">
         <div className="flex justify-center items-center gap-3">
-          <div className="size-12 relative">
+          <div className="size-14 relative">
             <Image
               src={Avatar}
               alt="Avatar"
@@ -27,6 +28,7 @@ const Dashboard = () => {
           <ThemeToggle />
         </div>
       </div>
+      <Data />
     </div>
   );
 };
