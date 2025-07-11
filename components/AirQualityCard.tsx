@@ -10,6 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import AirIllustration from "./AirIllustration";
 
 interface Props {
   lat: number;
@@ -69,16 +70,8 @@ const getAQIColor = (aqi: number) => {
 };
 
 const AirQualityCard = ({ lat, lon, city }: Props) => {
-  const {
-    data: aqiData,
-    error: aqiError,
-    isLoading: aqiLoading,
-  } = useAirQuality(lat, lon, city);
-  const {
-    data: weatherData,
-    error: weatherError,
-    isLoading: weatherLoading,
-  } = useWeather(city);
+  const { data: aqiData } = useAirQuality(lat, lon, city);
+  const { data: weatherData } = useWeather(city);
 
   const aqi = aqiData?.list[0].main.aqi ?? 0;
   const windSpeed = weatherData?.wind.speed ?? 0;
@@ -86,9 +79,6 @@ const AirQualityCard = ({ lat, lon, city }: Props) => {
 
   return (
     <>
-      {(aqiLoading || weatherLoading) && <p>Loading...</p>}
-      {(aqiError || weatherError) && <p>City data not available</p>}
-
       {aqiData && weatherData && (
         <div className="w-[360px] flex flex-col md:flex-row justify-between items-center gap-6 p-6 rounded-2xl shadow-md bg-background text-foreground relative border border-border transition-all duration-300">
           <div className="flex-1 flex flex-col gap-5">
@@ -113,7 +103,13 @@ const AirQualityCard = ({ lat, lon, city }: Props) => {
             </div>
 
             {/* AQI with Tooltip and Progress */}
-            <div className="h-[75px] px-3 py-8 bg-muted rounded-xl">
+            <div className="h-[75px] p-3 bg-muted rounded-xl">
+              <div className="w-full flex items-center justify-between">
+                <span className="text-xs py-1 text-muted-foreground">Good</span>
+                <span className="text-xs py-1 text-muted-foreground">
+                  Very Poor
+                </span>
+              </div>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -133,6 +129,9 @@ const AirQualityCard = ({ lat, lon, city }: Props) => {
                 </Tooltip>
               </TooltipProvider>
             </div>
+          </div>
+          <div className="absolute hidden md:block flex-shrink-0 top-0 right-0">
+            <AirIllustration index={aqi} />
           </div>
         </div>
       )}

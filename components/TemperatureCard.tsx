@@ -2,15 +2,14 @@ import React from "react";
 import OpenWeatherIcon from "@/lib/OpenWeatherIcon";
 import WeatherIllustration from "./WeatherIllustration";
 import useWeather from "@/hooks/useWeather";
+import { Skeleton } from "./ui/skeleton";
 
 const TemperatureCard = ({ city }: { city: string }) => {
-  const { data: weatherData, isLoading, error } = useWeather(city);
+  const { data: weatherData } = useWeather(city);
 
   return (
     //width 360px
     <>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Their is no city such that</p>}
       {weatherData && (
         <div className="w-[370px] flex flex-col md:flex-row justify-between items-center gap-6 p-6 rounded-2xl shadow-md bg-background text-foreground relative border border-border transition-all duration-300">
           {/* Left: Weather Info */}
@@ -74,3 +73,7 @@ const TemperatureCard = ({ city }: { city: string }) => {
 };
 
 export default TemperatureCard;
+
+export const TemperatureSkeleton = () => {
+  return <Skeleton className="w-[370px] h-[255px] rounded-xl" />;
+};
