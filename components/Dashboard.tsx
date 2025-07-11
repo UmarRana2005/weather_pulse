@@ -4,8 +4,11 @@ import Image from "next/image";
 import Avatar from "../public/avatar.jpg";
 import SearchBar from "./SearchBar";
 import ThemeToggle from "./ThemeToggle";
-import Data from "@/app/test/data";
+import AirQualityCard from "./AirQualityCard";
+import useLocation from "@/hooks/useLocation";
+import TemperatureCard from "./TemperatureCard";
 const Dashboard = () => {
+  const { data } = useLocation("Darwin");
   return (
     <div className="flex flex-col gap-9 items-start justify-start px-2 py-2 bg-piank-200">
       <div className="w-[750px] flex justify-between items-start gap-3">
@@ -28,7 +31,16 @@ const Dashboard = () => {
           <ThemeToggle />
         </div>
       </div>
-      <Data />
+      <div className="flex gap-2">
+        {data && <TemperatureCard city={data[0].name} />}
+        {data && (
+          <AirQualityCard
+            lat={data[0].lat}
+            lon={data[0].lon}
+            city={data[0].name}
+          />
+        )}
+      </div>
     </div>
   );
 };

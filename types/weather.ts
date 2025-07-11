@@ -1,3 +1,5 @@
+import { weatherConditions } from "./weatherConditions";
+
 export interface WeatherData {
   name: string;
   dt: number;
@@ -24,7 +26,7 @@ export interface WeatherData {
   };
   weather: {
     id: number;
-    main: string;
+    main: weatherConditions | string;
     description: string;
     icon: string;
   }[];
