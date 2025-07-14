@@ -6,12 +6,19 @@ import SearchBar from "./SearchBar";
 import ThemeToggle from "./ThemeToggle";
 import AirQualityCard from "./AirQualityCard";
 import useLocation from "@/hooks/useLocation";
-import TemperatureCard, { TemperatureSkeleton } from "./TemperatureCard";
+import TemperatureCard from "./TemperatureCard";
+import SkeletonCard from "./SkeletonCard";
+import TodayChart from "./TodayChart";
+
 const Dashboard = () => {
   const [search, setSearch] = useState("Lahore");
   const { data, error, isLoading } = useLocation(search);
+
+  const cityData = data?.[0]; // Check if first entry exists
+
   return (
-    <div className="flex flex-col gap-9 items-start justify-start px-2 py-2 bg-piank-200">
+    <div className="flex flex-col gap-3 items-start justify-start px-2 py-2 bg-pink-200">
+      {/* Header */}
       <div className="w-[750px] flex justify-between items-start gap-3">
         <div className="flex justify-center items-center gap-3">
           <div className="size-14 relative">
@@ -27,25 +34,49 @@ const Dashboard = () => {
             <h2 className="text-lg font-semibold">Umar Rana</h2>
           </div>
         </div>
+
         <div className="flex items-center justify-center gap-3">
           <SearchBar onSearch={(search) => setSearch(search)} />
           <ThemeToggle />
         </div>
       </div>
+
+      {/* Weather Cards */}
       <div className="flex gap-2">
-        {data ? (
-          <TemperatureCard city={data[0].name} />
+        {isLoading ? (
+          <>
+            <SkeletonCard className="w-[370px] h-[255px]" />
+            <SkeletonCard className="w-[370px] h-[255px]" />
+          </>
+        ) : error || !cityData ? (
+          <>
+            <SkeletonCard error={error} className="w-[370px] h-[255px]" />
+            <SkeletonCard error={error} className="w-[370px] h-[255px]" />
+          </>
         ) : (
-          <TemperatureSkeleton />
+          <>
+            <TemperatureCard city={cityData.name} />
+            <AirQualityCard
+              lat={cityData.lat}
+              lon={cityData.lon}
+              city={cityData.name}
+            />
+          </>
         )}
-        {data ? (
-          <AirQualityCard
-            lat={data[0].lat}
-            lon={data[0].lon}
-            city={data[0].name}
-          />
+      </div>
+      <div className="flex gap-2">
+        {isLoading ? (
+          <>
+            <SkeletonCard className="w-[450px] h-[255px]" />
+          </>
+        ) : error || !cityData ? (
+          <>
+            <SkeletonCard error={error} className="w-[450px] h-[255px]" />
+          </>
         ) : (
-          <TemperatureSkeleton />
+          <>
+            <TodayChart city={cityData.name} />
+          </>
         )}
       </div>
     </div>

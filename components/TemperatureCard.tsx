@@ -2,7 +2,6 @@ import React from "react";
 import OpenWeatherIcon from "@/lib/OpenWeatherIcon";
 import WeatherIllustration from "./WeatherIllustration";
 import useWeather from "@/hooks/useWeather";
-import { Skeleton } from "./ui/skeleton";
 
 const TemperatureCard = ({ city }: { city: string }) => {
   const { data: weatherData } = useWeather(city);
@@ -73,7 +72,3 @@ const TemperatureCard = ({ city }: { city: string }) => {
 };
 
 export default TemperatureCard;
-
-export const TemperatureSkeleton = () => {
-  return <Skeleton className="w-[370px] h-[255px] rounded-xl" />;
-};
