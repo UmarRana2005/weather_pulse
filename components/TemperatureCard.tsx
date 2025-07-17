@@ -1,11 +1,9 @@
 import React from "react";
 import OpenWeatherIcon from "@/lib/OpenWeatherIcon";
 import WeatherIllustration from "./WeatherIllustration";
-import useWeather from "@/hooks/useWeather";
+import { WeatherData } from "@/types/weather";
 
-const TemperatureCard = ({ city }: { city: string }) => {
-  const { data: weatherData } = useWeather(city);
-
+const TemperatureCard = ({ weatherData }: { weatherData: WeatherData }) => {
   return (
     //width 360px
     <>

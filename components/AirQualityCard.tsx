@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import { Wind } from "lucide-react";
-import useAirQuality from "@/hooks/useAirQuality";
-import useWeather from "@/hooks/useWeather";
 import { Progress } from "@/components/ui/progress";
 import {
   Tooltip,
@@ -11,11 +9,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import AirIllustration from "./AirIllustration";
+import { WeatherData } from "@/types/weather";
+import { AirQualityData } from "@/types/airQuality";
 
 interface Props {
-  lat: number;
-  lon: number;
-  city: string;
+  weatherData: WeatherData;
+  aqiData: AirQualityData;
 }
 
 const getAQILabel = (aqi: number) => {
@@ -69,10 +68,7 @@ const getAQIColor = (aqi: number) => {
   }
 };
 
-const AirQualityCard = ({ lat, lon, city }: Props) => {
-  const { data: aqiData } = useAirQuality(lat, lon, city);
-  const { data: weatherData } = useWeather(city);
-
+const AirQualityCard = ({ weatherData, aqiData }: Props) => {
   const aqi = aqiData?.list[0].main.aqi ?? 0;
   const windSpeed = weatherData?.wind.speed ?? 0;
   const pm25 = aqiData?.list[0].components.pm2_5;
