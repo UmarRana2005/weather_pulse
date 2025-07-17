@@ -28,7 +28,7 @@
 
 ## 🖼️ UI Preview
 
-![WeatherPulse Preview](./public/weatherAppUI.jpg)
+![WeatherPulse Preview](./public/weatherAppUI.png)
 
 ---
 
