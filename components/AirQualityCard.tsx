@@ -129,7 +129,7 @@ const AirQualityCard = ({ weatherData, aqiData }: Props) => {
           </div>
 
           <div className="absolute hidden md:block flex-shrink-0 top-0 right-0">
-            <AirIllustration index={aqi} extraClasses="w-[60px] h-[60px]" />
+            <AirIllustration index={aqi} />
           </div>
         </div>
       )}
