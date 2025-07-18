@@ -4,7 +4,9 @@ import SunPathArc from "./SunArcPath";
 import { WeatherData } from "@/types/weather";
 import { TodayForecastData } from "@/types/todayForecast";
 import PredictionCard from "./PredictionCard";
-
+import { unixToOffsetTime } from "@/lib/unixToOffset";
+import Image from "next/image";
+import Night from "../public/night.png";
 const Aside = ({
   weatherData,
   forecastData,
@@ -12,13 +14,6 @@ const Aside = ({
   weatherData: WeatherData;
   forecastData: TodayForecastData;
 }) => {
-  const formatTime = (timestamp: number) => {
-    return new Date(timestamp * 1000).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
-
   const {
     name: cityName,
     sys: countryData,
@@ -29,20 +24,27 @@ const Aside = ({
   const { list: forecastList } = forecastData;
 
   const [cardData, setCardData] = useState<typeof forecastList>([]);
-
+  const [isDay, setDay] = useState(true);
   useEffect(() => {
     const filtered = forecastList.filter(
       (_, index) => index % 8 === 0 && index !== 0
     );
     setCardData(filtered);
-  }, [forecastList]);
+    if (countryData.sunrise > dt) {
+      setDay(false);
+    } else if (countryData.sunrise <= dt && countryData.sunset >= dt) {
+      setDay(true);
+    } else {
+      setDay(false);
+    }
+  }, [forecastList, countryData, dt]);
 
   return (
     <div className="min-w-[250px] max-w-[300px] h-full flex flex-col items-center justify-start gap-3 px-4 py-2 bg-background rounded-md">
       {/* Header */}
       <div className="w-full flex justify-between items-center border-border border-b-2 py-2">
         <div className="flex flex-col gap-1 items-start justify-center">
-          <h1 className="text-xl font-semibold">Sun</h1>
+          <h1 className="text-xl font-semibold">{isDay ? "Sun" : "Night"}</h1>
           <p className="text-xs text-muted-foreground">
             {cityName}, {countryData.country}
           </p>
@@ -51,30 +53,54 @@ const Aside = ({
           {Math.round(mainWeather.temp)} °C
         </h1>
       </div>
-
-      {/* Sun Arc with Sunrise/Sunset */}
-      <div className="w-full flex flex-col items-center justify-center px-2 relative mb-3">
-        <SunPathArc
-          sunrise={countryData.sunrise}
-          sunset={countryData.sunset}
-          currentTime={dt}
-        />
-        <div className="w-full flex justify-between items-center absolute -bottom-3">
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-base">Sunrise</p>
-            <p className="text-xs text-muted-foreground">
-              {formatTime(countryData.sunrise)}am
-            </p>
+      {isDay ? (
+        <div className="w-full flex flex-col items-center justify-center px-2 relative mb-3">
+          <SunPathArc
+            sunrise={countryData.sunrise}
+            sunset={countryData.sunset}
+            currentTime={dt}
+          />
+          <div className="w-full flex justify-between items-center absolute -bottom-3">
+            <div className="flex flex-col items-center justify-center">
+              <p className="text-base">Sunrise</p>
+              <p className="text-xs text-muted-foreground">
+                {unixToOffsetTime(
+                  countryData.sunrise,
+                  weatherData.timezone
+                ).slice(25)}
+              </p>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <p className="text-base">Sunset</p>
+              <p className="text-xs text-muted-foreground">
+                {unixToOffsetTime(
+                  countryData.sunset,
+                  weatherData.timezone
+                ).slice(25)}
+              </p>
+            </div>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-base">Sunset</p>
-            <p className="text-xs text-muted-foreground">
-              {formatTime(countryData.sunset)}pm
+        </div>
+      ) : (
+        <div className="w-[70%] mx-auto relative">
+          <Image
+            src={Night}
+            alt="Night Image"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+          <div className="absolute -bottom-2 -left-7 flex gap-2">
+            <p className="text-base">
+              Sunrise:{" "}
+              <span className="text-muted-foreground">
+                {unixToOffsetTime(
+                  countryData.sunrise,
+                  weatherData.timezone
+                ).slice(25)}
+              </span>
             </p>
           </div>
         </div>
-      </div>
-
+      )}
       {/* Prediction Cards */}
       <div className="w-full flex flex-col justify-center items-start gap-5 py-2">
         <h1 className="text-xl font-semibold">Weather Prediction</h1>

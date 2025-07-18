@@ -10,7 +10,7 @@ interface Props {
 }
 const PredictionCard = ({ date, icon, weather, temp, feels }: Props) => {
   return (
-    <div className="w-full flex gap-4 items-center justify-start bg-muted rounded-md p-3">
+    <div className="w-full flex gap-4 items-center justify-between bg-muted rounded-lg p-3">
       <div className="grid place-content-center p-2">
         <OpenWeatherIcon src={icon} />
       </div>
@@ -21,8 +21,8 @@ const PredictionCard = ({ date, icon, weather, temp, feels }: Props) => {
         <p className="text-lg font-semibold">{weather}</p>
       </div>
       <div className="flex items-start justify-center gap-1">
-        <p className="text-xs text-muted-foreground">
-          {Math.round(temp)}/{Math.round(feels)} °C
+        <p className="text-xs font-semibold text-orange-300">
+          {Math.round(temp)}°/{Math.round(feels)}°
         </p>
       </div>
     </div>
