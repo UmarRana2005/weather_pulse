@@ -8,7 +8,7 @@ const TemperatureCard = ({ weatherData }: { weatherData: WeatherData }) => {
     //width 360px
     <>
       {weatherData && (
-        <div className="w-[370px] flex flex-col md:flex-row justify-between items-center gap-6 p-6 rounded-2xl shadow-md bg-background text-foreground relative border border-border transition-all duration-300">
+        <div className="w-full md:w-[360px] flex flex-col md:flex-row justify-between items-start gap-6 p-6 rounded-2xl shadow-md bg-background text-foreground relative border border-border transition-all duration-300">
           {/* Left: Weather Info */}
           <div className="flex-1 flex flex-col gap-5">
             {/* Header: Icon + City Name */}
@@ -17,7 +17,7 @@ const TemperatureCard = ({ weatherData }: { weatherData: WeatherData }) => {
                 <OpenWeatherIcon src={weatherData.weather[0].icon} />
               </div>
               <div>
-                <p className="text-xl font-bold capitalize">
+                <p className="text-lg md:text-xl font-bold capitalize">
                   {weatherData.name}
                 </p>
                 <p className="text-sm font-medium capitalize text-muted-foreground">
@@ -28,7 +28,7 @@ const TemperatureCard = ({ weatherData }: { weatherData: WeatherData }) => {
 
             {/* Temperature */}
             <div className="flex items-center gap-4">
-              <h2 className="text-4xl font-extrabold">
+              <h2 className="text-2xl md:text-4xl font-extrabold">
                 {Math.round(weatherData.main.temp)}°C
               </h2>
               <span className="px-2 py-1 rounded-md text-xs bg-muted text-muted-foreground">
@@ -37,22 +37,22 @@ const TemperatureCard = ({ weatherData }: { weatherData: WeatherData }) => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-4">
+            <div className="w-full grid grid-cols-3 gap-4">
               <div className="flex flex-col items-center bg-primary text-primary-foreground rounded-xl p-3 shadow-sm">
                 <span className="text-sm font-medium">Pressure</span>
-                <span className="text-lg font-semibold">
+                <span className="text-base md:text-lg font-semibold">
                   {Math.round(weatherData.main.pressure)} mb
                 </span>
               </div>
               <div className="flex flex-col items-center bg-orange-200 dark:bg-orange-800 text-black dark:text-white rounded-xl p-3 shadow-sm">
                 <span className="text-sm font-medium">Visibility</span>
-                <span className="text-lg font-semibold">
+                <span className="text-base md:text-lg font-semibold">
                   {Math.round(weatherData.visibility / 1000)} km
                 </span>
               </div>
               <div className="flex flex-col items-center bg-muted text-muted-foreground rounded-xl p-3 shadow-sm">
                 <span className="text-sm font-medium">Humidity</span>
-                <span className="text-lg font-semibold">
+                <span className="text-base md:text-lg font-semibold">
                   {weatherData.main.humidity}%
                 </span>
               </div>

@@ -6,7 +6,7 @@ const TomorrowCard = ({ data }: { data: TodayForecastData }) => {
   return (
     <>
       {data && (
-        <div className="flex  flex-col gap-7 justify-between p-4 rounded-2xl shadow-md bg-background text-foreground border border-border transition-all duration-300 w-[278px] relative">
+        <div className="w-full md:w-[270px] flex  flex-col gap-7 justify-between p-4 rounded-2xl shadow-md bg-background text-foreground border border-border transition-all duration-300  relative">
           <h2 className="text-lg font-semibold text-foreground mb-3">
             Tomorrow
           </h2>
@@ -18,7 +18,7 @@ const TomorrowCard = ({ data }: { data: TodayForecastData }) => {
               {data.list[9].weather[0].main}
             </span>
           </div>
-          <div className="w-1/2 mx-auto absolute top-10 right-5">
+          <div className="hidden md:block w-1/2 mx-auto absolute top-10 right-5">
             <WeatherIllustration condition={data.list[9].weather[0].main} />
           </div>
         </div>

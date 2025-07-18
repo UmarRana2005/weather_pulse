@@ -40,7 +40,7 @@ const Aside = ({
   }, [forecastList, countryData, dt]);
 
   return (
-    <div className="min-w-[250px] max-w-[300px] h-full flex flex-col items-center justify-start gap-3 px-4 py-2 bg-background rounded-md">
+    <div className="w-full md:w-[230px] h-fit flex flex-col items-center justify-start gap-3 px-4 py-2 bg-background rounded-md">
       {/* Header */}
       <div className="w-full flex justify-between items-center border-border border-b-2 py-2">
         <div className="flex flex-col gap-1 items-start justify-center">

@@ -30,7 +30,7 @@ const TodayChart = ({ data }: { data: TodayForecastData }) => {
   return (
     <>
       {chartData.length > 0 && (
-        <div className="w-[450px] p-4 rounded-2xl shadow-md bg-background text-foreground relative border border-border transition-all duration-300">
+        <div className="w-full md:w-[450px] p-4 rounded-2xl shadow-md bg-background text-foreground relative border border-border transition-all duration-300">
           <h2 className="text-lg font-semibold text-foreground mb-3">
             How&apos;s the temperature today?
           </h2>

@@ -27,12 +27,12 @@ const Dashboard = () => {
   );
   const { data: ForcastData } = useTodayForecast(search);
   return (
-    <div className="flex gap-3 items-start justify-center">
+    <div className="flex flex-1 flex-wrap gap-3 items-center justify-center bg-pinak-300">
       <div className="flex flex-col gap-3 items-start justify-start px-2 py-2">
         {/* Header */}
-        <div className="w-[750px] flex justify-between items-start gap-3">
+        <div className="w-full flex justify-between items-start gap-3">
           <div className="flex justify-center items-center gap-3">
-            <div className="size-14 relative">
+            <div className="size-10 lg:size-14 relative">
               <Image
                 src={Avatar}
                 alt="Avatar"
@@ -40,9 +40,9 @@ const Dashboard = () => {
                 style={{ objectFit: "cover", borderRadius: "50%" }}
               />
             </div>
-            <div className="flex items-start justify-center flex-col">
-              <h1 className="text-lg">Hello,</h1>
-              <h2 className="text-lg font-semibold">Umar Rana</h2>
+            <div className="hidden md:flex items-start justify-center flex-col">
+              <h1 className="text-base lg:text-lg">Hello,</h1>
+              <h2 className="text-base font-semibold">Umar Rana</h2>
             </div>
           </div>
 
@@ -53,7 +53,7 @@ const Dashboard = () => {
         </div>
 
         {/* Weather Cards */}
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 ">
           {isLoading ? (
             <>
               <SkeletonCard className="w-[370px] h-[255px]" />
@@ -73,7 +73,7 @@ const Dashboard = () => {
             </>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {isLoading ? (
             <>
               <SkeletonCard className="w-[450px] h-[255px]" />
@@ -96,7 +96,7 @@ const Dashboard = () => {
           )}
         </div>
       </div>
-      <div className="h-full">
+      <div className="">
         {isLoading ? (
           <>
             <SkeletonCard className="min-w-[250px] max-w-[300px] h-full" />
