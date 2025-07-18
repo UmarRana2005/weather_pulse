@@ -62,8 +62,19 @@ const TodayChart = ({ data }: { data: TodayForecastData }) => {
                 stroke="#fb923c"
                 strokeWidth={2}
                 activeDot={{ r: 4 }}
-                dot={({ cx, cy, payload }) =>
-                  cx && cy && payload ? (
+                dot={({ cx, cy, payload }) => {
+                  if (
+                    typeof cx !== "number" ||
+                    typeof cy !== "number" ||
+                    !payload
+                  ) {
+                    // fallback transparent dot to avoid type error
+                    return (
+                      <circle cx={0} cy={0} r={0} fill="transparent" />
+                    ) as React.ReactElement<SVGElement>;
+                  }
+
+                  return (
                     <g>
                       <foreignObject
                         x={cx - 15}
@@ -84,8 +95,8 @@ const TodayChart = ({ data }: { data: TodayForecastData }) => {
                         strokeWidth={1}
                       />
                     </g>
-                  ) : null
-                }
+                  ) as unknown as React.ReactElement<SVGElement>;
+                }}
               />
             </LineChart>
           </ResponsiveContainer>
