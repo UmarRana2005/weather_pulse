@@ -60,14 +60,14 @@ const Aside = ({
             sunset={countryData.sunset}
             currentTime={dt}
           />
-          <div className="w-full flex justify-between items-center absolute -bottom-3">
+          <div className="w-full lg:w-[120%] flex justify-between items-center absolute -bottom-4">
             <div className="flex flex-col items-center justify-center">
               <p className="text-base">Sunrise</p>
               <p className="text-xs text-muted-foreground">
                 {unixToOffsetTime(
                   countryData.sunrise,
                   weatherData.timezone
-                ).slice(25)}
+                ).slice(26)}
               </p>
             </div>
             <div className="flex flex-col items-center justify-center">
@@ -76,26 +76,26 @@ const Aside = ({
                 {unixToOffsetTime(
                   countryData.sunset,
                   weatherData.timezone
-                ).slice(25)}
+                ).slice(26)}
               </p>
             </div>
           </div>
         </div>
       ) : (
-        <div className="w-[70%] mx-auto relative">
+        <div className="w-full flex flex-col items-center justify-center px-2 relative mb-3">
           <Image
             src={Night}
             alt="Night Image"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
-          <div className="absolute -bottom-2 -left-7 flex gap-2">
+          <div className="absolute -bottom-4 left-6 flex gap-2">
             <p className="text-base">
               Sunrise:{" "}
               <span className="text-muted-foreground">
                 {unixToOffsetTime(
                   countryData.sunrise,
                   weatherData.timezone
-                ).slice(25)}
+                ).slice(26)}
               </span>
             </p>
           </div>

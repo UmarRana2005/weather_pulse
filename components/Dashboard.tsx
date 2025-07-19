@@ -103,10 +103,7 @@ const Dashboard = () => {
           </>
         ) : error || !cityData ? (
           <>
-            <SkeletonCard
-              error={error}
-              className="min-w-[250px] max-w-[300px] h-full"
-            />
+            <SkeletonCard error={error} className="w-full md:w-[230px] h-fit" />
           </>
         ) : (
           <>

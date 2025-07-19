@@ -11,9 +11,9 @@ const SunPathArc: React.FC<SunPathProps> = ({
   sunset,
   currentTime,
 }) => {
-  const width = 200;
-  const height = 120;
-  const radius = 80;
+  const width = 260;
+  const height = 140;
+  const radius = 100;
   const centerX = width / 2;
   const centerY = height;
 
